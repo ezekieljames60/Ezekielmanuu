@@ -1,0 +1,83 @@
+---
+title: "Friday R Study"
+author: "KERAMA EZEKIEL JAMES"
+date: '2023-05-25'
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#This is another workout of the R analysis
+library(epicalc)
+#The zap command is used to clear all the contents from the environment
+zap()
+#Loading of the dataset to be used 
+data("Decay")
+#Data to be used we use the use command
+use(Decay)
+#To describe the data used we use the des() command
+des()
+#To get the summary of the entire dataset we use the summ() command
+summ()
+data("ANCtable")
+use(ANCtable)
+death <- factor(death) 
+levels(death) <- c("no","yes")
+anc <-factor(anc)
+levels(anc) <- c("old","new")
+clinic <- factor(clinic)
+levels(clinic) <- c("A","B")
+pack()
+.data
+glm(death ~ anc + clinic, binomial,weights = Freq,data = .data)
+str(death)
+str(clinic)
+library(ggplot2)
+ggplot(airquality, aes(x = Ozone, y = Solar.R)) + 
+  geom_point() + 
+  labs(title = "death vs. clinic", x = "death(ppb)", y = "clinic (Langley)")
+summ(death)
+summ(clinic)
+ggplot(airquality, aes(x = Ozone, y = Solar.R)) + 
+  geom_point() + 
+  labs(title = "clinic vs. anc", x = "clinic (ppb)", y = "anc (Langley)")
+names(death)
+str(anc)
+summ(anc)
+hist(ANCtable$death,col = "yellow")
+hist(ANCtable$anc,col = "red")
+str(hist(ANCtable$death,col = "yellow"))
+# Model Ozone and Solar.R
+model1 <- lm(death ~ clinic, data = ANCtable)
+summary(model1)
+hist(ANCtable$clinic,col = "blue")
+str(hist(ANCtable$clinic,col = "blue"))
+hist(ANCtable$Freq,col = "green")
+str(hist(ANCtable$Freq,col = "green"))
+#How to come up with the names of all the variables in the entire dataset
+names(ANCtable)
+#How to come up with the structral information of the entire dataset
+str(ANCtable)
+#How to come up with the summary of the entire dataset
+summ(ANCtable)
+#How to come up wih the sum of the number of columns of the entire dataset
+ncol(ANCtable)
+#How to come up with the summation of the number of the rows of the entire vdataset in the R software
+nrow(ANCtable)
+#How to view  the entire dataset in an R software
+View(ANCtable)
+#How to to cme up with the summation of the death variable in the ANCtable dataset in  the R software
+sum(ANCtable$death)
+#Getting the summation of the clinic variable in the ANCtable dataset
+sum(ANCtable$clinic)
+.data$condition <- c(1,1,2,2,3,3,4,4)
+data2 <- reshape(.data,timevar = "death", v.names = "Freq",idvar = "condition",direction = "wide")
+
+
+```
+

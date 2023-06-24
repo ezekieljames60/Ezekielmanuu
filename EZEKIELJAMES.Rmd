@@ -1,0 +1,81 @@
+---
+title: "NEW STUDY IN R"
+author: "KERAMA JAMES THE DATA ANALYST"
+date: '2023-04-23'
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Another study in R concerning with the dataset cancer
+#First of everything load the library that contains the dataset to enhance the smooth running of the workouts
+library(survival)
+#Secondly load the dataset itself to portray the dataset content
+data("cancer")
+#Type the view command to see the dataset composition
+View(cancer)
+#Get the summary of the dataset to better comprehend what the dataset entails
+summary(cancer)
+#Get the structure of the dataset to better comprehend what kind of data types the dataset contains
+str(cancer)
+#Get the total number of missing values in the dataset of concern
+sum(is.na(cancer))
+#Workout the outliers concept using the boxplot idea
+boxplot(cancer)
+summary(boxplot(cancer))
+#Do away with the missing values by deletion of the NAS by omit concept
+cancer <- na.omit(cancer)
+#Do away with the missing values with the use of the tidyr library and the drop concept
+library(tidyr)
+#Creation of the new dataset from the old dataset that has no missing values
+clean <- drop_na(cancer)
+View(clean)
+summary(clean)
+str(clean)
+#Data visualization using the scatter plots
+# Load ggplot2 library
+library(ggplot2)
+# Scatterplot of time and age
+ggplot(cancer, aes(x = time, y = age)) + 
+  geom_point() + 
+  labs(title = "time vs. age", x = "time", y = "age")
+
+# Scatterplot of time and sex
+ggplot(cancer, aes(x = time, y = sex)) + 
+  geom_point() + 
+  labs(title = "time vs. sex", x = "time", y = "sex")
+
+# Scatterplot of time and wt.loss
+ggplot(cancer, aes(x = time, y = wt.loss)) + 
+  geom_point() + 
+  labs(title = "time vs. wt.loss", x = "time", y = "wt.loss")
+#Data modeling using the linear regression models
+# Fit linear regression models
+model1 <- lm(time ~ age, data = cancer)
+model2 <- lm(time ~ sex, data = cancer)
+model3 <- lm(time ~ wt.loss, data = cancer)
+# Visualize the models
+plot(time ~ age, data = cancer , main = "Time against age scatter plot done by James ", col = "red")
+abline(model1, col = "green")
+
+
+plot(time ~ sex, data = cancer , main = "Time against sex scatter plot done by James ", col = "brown")
+abline(model2, col = "purple")
+
+plot(time ~ wt.loss, data = cancer , main = "Time against weight loss scatter plot done by James ", col = "blue")
+abline(model3, col = "red")
+# Display model summaries
+summary(model1)
+summary(model2)
+summary(model3)
+#Observation of the first and last six rows and columns of the new cancer dataset
+head(clean)
+tail(clean)
+#Observation of the firs and last six rows and columns of the old cancer dataset
+head(cancer)
+tail(cancer)
+```
+
